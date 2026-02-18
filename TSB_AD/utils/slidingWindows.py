@@ -43,11 +43,13 @@ def find_length_rank(data, rank=1):
                 if i > sorted_local_max[id_tmp]: 
                     max_local_max = i           
                     break
-        # print('sorted_local_max: ', sorted_local_max)
-        # print('max_local_max: ', max_local_max)
-        if local_max[max_local_max]<3 or local_max[max_local_max]>300:
+        #print('sorted_local_max: ', sorted_local_max)
+        #print('max_local_max: ', max_local_max)
+
+        final_period = local_max[max_local_max]+base
+        if final_period>300:
             return 125
-        return local_max[max_local_max]+base
+        return final_period
     except:
         return 125
     
@@ -65,8 +67,9 @@ def find_length(data):
     local_max = argrelextrema(auto_corr, np.greater)[0]
     try:
         max_local_max = np.argmax([auto_corr[lcm] for lcm in local_max])
-        if local_max[max_local_max]<3 or local_max[max_local_max]>300:
+        final_period = local_max[max_local_max]+base
+        if final_period>300:
             return 125
-        return local_max[max_local_max]+base
+        return final_period
     except:
         return 125
