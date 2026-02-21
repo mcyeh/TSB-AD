@@ -1,11 +1,13 @@
-import numpy as np
 import math
+
+import numpy as np
+
 from .utils.slidingWindows import find_length_rank
 
-Unsupervise_AD_Pool = ['FFT', 'SR', 'NORMA', 'Series2Graph', 'Sub_IForest', 'IForest', 'LOF', 'Sub_LOF', 'POLY', 'MatrixProfile', 'Sub_PCA', 'PCA', 'HBOS', 
+Unsupervise_AD_Pool = ['FFT', 'SR', 'NORMA', 'Series2Graph', 'Sub_IForest', 'IForest', 'LOF', 'Sub_LOF', 'POLY', 'MatrixProfile', 'Sub_PCA', 'PCA', 'HBOS',
                         'Sub_HBOS', 'KNN', 'Sub_KNN','KMeansAD', 'KMeansAD_U', 'KShapeAD', 'COPOD', 'CBLOF', 'COF', 'EIF', 'RobustPCA', 'Lag_Llama', 'TimesFM', 'Chronos', 'MOMENT_ZS', 'TSPulse_ZS']
-Semisupervise_AD_Pool = ['Left_STAMPi', 'SAND', 'MCD', 'Sub_MCD', 'OCSVM', 'Sub_OCSVM', 'AutoEncoder', 'CNN', 'LSTMAD', 'TranAD', 'USAD', 'OmniAnomaly', 
-                        'AnomalyTransformer', 'TimesNet', 'FITS', 'Donut', 'OFA', 'MOMENT_FT', 'M2N2', 'TSPulse_FT']
+Semisupervise_AD_Pool = ['Left_STAMPi', 'SAND', 'MCD', 'Sub_MCD', 'OCSVM', 'Sub_OCSVM', 'AutoEncoder', 'CNN', 'LSTMAD', 'TranAD', 'USAD', 'OmniAnomaly',
+                        'AnomalyTransformer', 'TimesNet', 'FITS', 'Donut', 'OFA', 'MOMENT_FT', 'M2N2', 'TSPulse_FT', 'xLSTMAD']
 
 def run_Unsupervise_AD(model_name, data, **kwargs):
     try:
@@ -41,8 +43,8 @@ def run_Semisupervise_AD(model_name, data_train, data_test, **kwargs):
 def run_FFT(data, ifft_parameters=5, local_neighbor_window=21, local_outlier_threshold=0.6, max_region_size=50, max_sign_change_distance=10):
     from .models.FFT import FFT
     clf = FFT(ifft_parameters=ifft_parameters, local_neighbor_window=local_neighbor_window, local_outlier_threshold=local_outlier_threshold, max_region_size=max_region_size, max_sign_change_distance=max_sign_change_distance)
-    clf.fit(data)  
-    score = clf.decision_scores_ 
+    clf.fit(data)
+    score = clf.decision_scores_
     return score.ravel()
 
 def run_Sub_IForest(data, periodicity=1, n_estimators=100, max_features=1, n_jobs=1):
@@ -406,7 +408,7 @@ def run_M2N2(
     return score.ravel()
 
 
-def run_TSPulse_ZS(data, 
+def run_TSPulse_ZS(data,
                    model="ibm-granite/granite-timeseries-tspulse-r1",
                    win_size=96,
                    batch_size=256,
@@ -456,6 +458,15 @@ def run_TSPulse_FT(data_train,
             finetune_epochs=num_epochs,
             finetune_lr=lr,
         )
+    clf.fit(data_train)
+    score = clf.decision_function(data_test)
+    return score.ravel()
+
+
+def run_xLSTMAD(data_train, data_test, window_size=100, lr=0.005, batch_size=32, embedding_dim=40):
+    from .models.xLSTMAD import xLSTMAD, xLSTMADModule
+    model = xLSTMADModule(embedding_dim=embedding_dim, window_size=window_size, lr=lr, features_no=data_test.shape[1])
+    clf = xLSTMAD(model=model, window_size=window_size, batch_size=batch_size)
     clf.fit(data_train)
     score = clf.decision_function(data_test)
     return score.ravel()
