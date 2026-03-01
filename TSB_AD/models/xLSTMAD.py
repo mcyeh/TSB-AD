@@ -49,18 +49,18 @@ class xLSTMADModule(L.LightningModule):
     and the output from the decoder is projected back to the original feature space.
     The model is trained using mean squared error loss.
 
-    When using, please cite the xLSTMAD paper available here: https://arxiv.org/pdf/2506.22837
+    xLSTMAD was published at the ICDM 2025 (IEEE International Conference on Data Mining).
+    When using, please cite the xLSTMAD paper (preprint available here: https://arxiv.org/abs/2506.22837 )
     ```
-    @INPROCEEDINGS {xlstmad,
-        author = {Faber, Kamil and Pietron, Marcin and Zurek, Dominik and Corizzo, Roberto},
-        booktitle = { 2025 IEEE International Conference on Data Mining (ICDM) },
-        title = {{ xLSTMAD: A Powerful xLSTM-based Method for Anomaly Detection }},
-        year = {2025},
-        volume = {},
-        ISSN = {},
-        pages = {247-256},
-        doi = {10.1109/ICDM65498.2025.00032},
-        publisher = {IEEE Computer Society}
+        @INPROCEEDINGS{xlstmad,
+          author={Faber, Kamil and Pietron, Marcin and Zurek, Dominik and Corizzo, Roberto},
+          booktitle={2025 IEEE International Conference on Data Mining (ICDM)},
+          title={xLSTMAD: A Powerful xLSTM-based Method for Anomaly Detection},
+          year={2025},
+          volume={},
+          number={},
+          pages={247-256},
+          doi={10.1109/ICDM65498.2025.00032}}
     }
     ```
 
