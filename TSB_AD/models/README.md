@@ -30,3 +30,10 @@ If you want to use [Lag-Llama](https://github.com/time-series-foundation-models/
 gluonts[torch]<=0.14.4
 ```
 and download the checkpoint from [Link](https://github.com/time-series-foundation-models/lag-llama) and add the path to [Lag_Llama.py](https://github.com/TheDatumOrg/TSB-AD/blob/main/TSB_AD/models/Lag_Llama.py).
+
+
+If you want to use [xLSTMAD](https://github.com/Nyderx/xlstmad), please install the following
+```bash
+lightning>=2.5.6
+xlstm>=2.0.5
+```

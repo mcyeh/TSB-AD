@@ -137,7 +137,7 @@ If you have problem installing `torch` using pip, try the following:
 conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 pytorch-cuda=12.1 -c pytorch -c nvidia
 ```
 
-For instructions on the installation of Foundation Models, please refer to [link](https://github.com/TheDatumOrg/TSB-AD/tree/main/TSB_AD/models/README.md).
+For instructions on the installation of Foundation Models and dependecies for running some specific models, please refer to [link](https://github.com/TheDatumOrg/TSB-AD/tree/main/TSB_AD/models/README.md).
 
 **Step 4:** Install the package:
 ```bash
