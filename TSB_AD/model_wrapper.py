@@ -6,7 +6,7 @@ from .utils.slidingWindows import find_length_rank
 
 Unsupervise_AD_Pool = ['FFT', 'SR', 'NORMA', 'Series2Graph', 'Sub_IForest', 'IForest', 'LOF', 'Sub_LOF', 'POLY', 'MatrixProfile', 'Sub_PCA', 'PCA', 'HBOS',
                         'Sub_HBOS', 'KNN', 'Sub_KNN','KMeansAD', 'KMeansAD_U', 'KShapeAD', 'COPOD', 'CBLOF', 'COF', 'EIF', 'RobustPCA', 'Lag_Llama', 'TimesFM', 'Chronos', 'MOMENT_ZS', 'TSPulse_ZS']
-Semisupervise_AD_Pool = ['Left_STAMPi', 'SAND', 'MCD', 'Sub_MCD', 'OCSVM', 'Sub_OCSVM', 'AutoEncoder', 'CNN', 'LSTMAD', 'TranAD', 'USAD', 'OmniAnomaly',
+Semisupervise_AD_Pool = ['Left_STAMPi', 'SAND', 'MCD', 'Sub_MCD', 'OCSVM', 'Sub_OCSVM', 'AutoEncoder', 'CNN', 'LSTMAD', 'TranAD', 'USAD', 'OmniAnomaly', 'PatchTST',
                         'AnomalyTransformer', 'TimesNet', 'FITS', 'Donut', 'OFA', 'MOMENT_FT', 'M2N2', 'TSPulse_FT', 'xLSTMAD']
 
 def run_Unsupervise_AD(model_name, data, **kwargs):
@@ -301,6 +301,13 @@ def run_TranAD(data_train, data_test, win_size=10, lr=1e-3):
 def run_AnomalyTransformer(data_train, data_test, win_size=100, lr=1e-4, batch_size=128):
     from .models.AnomalyTransformer import AnomalyTransformer
     clf = AnomalyTransformer(win_size=win_size, input_c=data_test.shape[1], lr=lr, batch_size=batch_size)
+    clf.fit(data_train)
+    score = clf.decision_function(data_test)
+    return score.ravel()
+
+def run_PatchTST(data_train, data_test, win_size=100, lr=1e-4, batch_size=128):
+    from .models.PatchTST import PatchTST
+    clf = PatchTST(win_size=win_size, input_c=data_test.shape[1], lr=lr, batch_size=batch_size)
     clf.fit(data_train)
     score = clf.decision_function(data_test)
     return score.ravel()
