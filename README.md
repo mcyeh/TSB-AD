@@ -12,6 +12,7 @@
 </p>
 
 🚀 **What’s New?**
+- [Apr. 1, 2026] [🏆 Leaderboard](https://thedatumorg.github.io/TSB-AD/#leaderboard) supports community submissions. Researchers are welcome to submit their models!
 - [Oct. 26, 2025] [✨ Tutorial](https://github.com/TheDatumOrg/TSB-AD/tree/main/tutorials) featuring hands-on notebooks and useful resources.
 - [Nov. 20, 2024] [🌐 Project homepage](https://thedatumorg.github.io/TSB-AD/) is online and release TSB-AD-U/M dataset.
 - [Nov. 6, 2024] 📦 Easy installation via PyPI: `pip install TSB-AD`.
