@@ -160,15 +160,22 @@
  <p>
 </div>
 
-<section class="hero is-small is-light">
+<section id="leaderboard" class="hero is-small is-light leaderboard-section">
   <div class="hero-body">
-    <div class="container">
-      <h2 class="title">🏆 TSB-AD Leaderboard</h2>
-      <h3>Last updated: January 1, 2025</h3>
+    <div class="container is-max-desktop">
+      <p class="leaderboard-kicker">Benchmark Results</p>
+      <h2 class="title is-3 leaderboard-title">TSB-AD Leaderboard</h2>
+      <p class="leaderboard-subtitle">
+        Methods are ranked by average <strong>VUS-PR</strong> across the TSB-AD benchmark.
+        Higher values indicate stronger anomaly detection performance.
+      </p>
+      <p class="leaderboard-meta">Last updated: April 1, 2026</p>
 
-      <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-        <iframe src="static/leaderboard/TSB-AD-updated.html"
-                style="width: 95%; height: 700px; border: none;">
+      <div class="leaderboard-frame">
+        <iframe
+          src="static/leaderboard/TSB-AD-updated.html"
+          title="TSB-AD leaderboard table"
+          loading="lazy">
         </iframe>
       </div>
     </div>
